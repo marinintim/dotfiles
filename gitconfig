@@ -1,0 +1,32 @@
+[user]
+	name = Tim Marinin
+	email = mt@marinintim.com
+[core]
+	editor = vim
+
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
+
+[merge]
+	tool = Kaleidoscope
+
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[difftool]
+	prompt = false
+
+[mergetool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+[alias]
+	ci = commit --verbose
+	dc = diff --cached
+	aa = add --all --
+	st = status
+	dw = diff --unstaged

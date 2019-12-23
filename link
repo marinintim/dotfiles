@@ -1,0 +1,32 @@
+#!/bin/bash
+# install linkfiles
+#
+# Usage:
+# ./link emacs # will link init.el
+# ./link up # will update dotfiles repo
+HERE=`pwd`;
+
+if [ "emacs" = "$1" ]; then
+  echo "Linking init.el -> .emacs/init.el";
+  ln -sfn "$HERE/init.el" "$HOME/.emacs.d/init.el";
+  exit 0;
+fi;
+
+if [ "git" = "$1" ]; then
+  echo "Linking gitconfig -> .git/config";
+  ln -sfn "$HERE/gitconfig" "$HOME/.gitconfig"
+  exit 0;
+fi;
+
+if [ "up" = "$1" ]; then
+  echo "Updating linkfiles checkout";
+  git pull;
+fi;
+
+if [ "" = "$1" ]; then
+  echo "Specify which linkfiles to link."
+  echo "Available linkfiles:";
+  echo "  ./link emacs -- emacs init.el with use-package"
+  echo "  ./link git -- gitconfig with Kaleidoscope"
+  exit 1;
+fi;
